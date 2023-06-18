@@ -1,66 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel React Boilerplate
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Prérequis
+- PHP v8.0
+- NodeJS v16.0
+- MySQL v8.0
+- Composer v2.0 ou plus
+- Npm v6 ou plus
+## Packages installés
+- Filament v2.0 => https://filamentphp.com/docs/2.x/admin/installation
+- filament-shield => https://github.com/bezhanSalleh/filament-shield#installation
+- filament-breezy => https://github.com/jeffgreco13/filament-breezy
+- TailwindCSS v3.3.2 => https://getbootstrap.com/docs/5.0/getting-started/introduction/
+- React v18.2.0
 
-## About Laravel
+## Installation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. Cloner le projet
+2. Copier le fichier .env.example :
+```
+cp .env.example .env
+```
+3. Ajouter les identifiants de la DB dans le .env
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=rent-books
+DB_USERNAME=root
+DB_PASSWORD=
+```
+4. Installer les dépendances php avec la commande:
+```
+composer install
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+5. Installer les dépendances JS:
+```
+npm install
+```
+## Développement
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Pour lancer le projet en local exécuter la commande:
 
-## Learning Laravel
+```
+php artisan serve
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+puis:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```
+npm run dev
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+La version de dev est disponible l'adresse suivante:
+```
+http://localhost:8000
+```
 
-## Laravel Sponsors
+## FRONT
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### REACT
 
-### Premium Partners
+1. Création d'un composant
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Pour ajouter un composant React à l'application, vous devez créer le composant dans le dossier suivant:
+```/resources/js/components``` au format JSX. 
+Une fois le composant terminé, vous devez enregistrer le composant dans le DOM react, pour cela ajouter les lignes suivante dans le fichier ```/resources/js/app.jsx ```:
 
-## Contributing
+```
+import  VotreComposant './components/VotreComposant.jsx';
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+bindComponent('rc-votre-composant', <VotreComposant />);
+```
 
-## Code of Conduct
+2. Déclaration du composant dans le html
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Rendez-vous dans le fichier blade où vous souhaiter placer votre composant React et définissez votre composant de la manière suivante :
 
-## Security Vulnerabilities
+```
+<div id="rc-votre-composant"></div>
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Si vous souhaiter passer des informations depuis le back, vous devez ajouter l'attribut ```data-props```:
 
-## License
+```
+<div id="rc-votre-composant" data-props="@json([ 'message' => 'Il est bon?'])"></div>
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. Déclaration du composant avec une directive blade custom
+
+Pour déclarer plus facilement votre composant vous pouvez utiliser la directive custom Blade ```@react(id, props)``` de la manière suivante:
+
+```
+@react(['id' => 'home', 'props' => [ 'message' => 'Il est bon?']])
+
+ou simplement
+
+@react(['id' => 'home'])
+```
+
+Les informations seront directement injecté dans les props du composant et vous pouvez les récupérer de la manière suivante:
+
+```
+export default function VotreComposant({ message }) {
+    return <div>{message ?? 'Aucun message'}</div>;
+}
+```
+
+# FILAMENT
+
+## Création d'un admin:
+
+```
+php artisan make:filament-user
+```
