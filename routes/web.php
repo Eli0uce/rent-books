@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
