@@ -6,6 +6,7 @@ const Home = () => {
     const [books, setBooks] = useState([]);
     const [allKinds, setAllKinds] = useState([]);
     const [selectedKind, setSelectedKind] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         fetchBooks();
@@ -36,9 +37,19 @@ const Home = () => {
         setSelectedKind(kind);
     };
 
+    const handleSearchTermChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
     const filteredBooks = selectedKind
         ? books.filter((book) => book.kind === selectedKind)
         : books;
+
+    const searchedBooks = searchTerm
+        ? filteredBooks.filter((book) =>
+              book.title.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : filteredBooks;
 
     return (
         <div>
@@ -57,11 +68,21 @@ const Home = () => {
                         </option>
                     ))}
                 </select>
+                <input
+                    type="text"
+                    placeholder="Rechercher un livre"
+                    value={searchTerm}
+                    onChange={handleSearchTermChange}
+                    className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                />
             </div>
-            <hr className="my-4 mx-20"/>
+            <hr className="my-4 mx-20" />
             <div className="flex flex-wrap justify-center">
-                {filteredBooks.map((book) => (
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg my-5 mx-5">
+                {searchedBooks.map((book) => (
+                    <div
+                        key={book.id}
+                        className="max-w-sm rounded overflow-hidden shadow-lg my-5 mx-5"
+                    >
                         <img height="100px" src={book.image} alt={book.title} />
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2">
@@ -75,7 +96,8 @@ const Home = () => {
                                 {truncateDescription(book.description, 100)}
                             </p>
                             <p className="text-m mb-2 text-gray-700">
-                                <strong>Quantité :</strong> {book.quantity} restants
+                                <strong>Quantité :</strong> {book.quantity}{" "}
+                                restants
                             </p>
                         </div>
                         <div className="px-6 pt-4 pb-2">
