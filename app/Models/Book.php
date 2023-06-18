@@ -10,18 +10,13 @@ class Book extends Model
         'id',
         'title',
         'author',
-        'kind_id',
+        'kind',
         'description',
         'image',
         'quantity',
     ];
 
     protected $table = 'books';
-
-    public function kind()
-    {
-        return $this->belongsTo(Kind::class);
-    }
 
     public $timestamps = false;
 }

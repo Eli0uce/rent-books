@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->unsignedBigInteger('kind_id');
-            $table->foreign('kind_id')->references('id')->on('kinds')->onDelete('cascade');
+            $table->enum('kind', ['roman', 'fantasy', 'bd', 'manga', 'poesie', 'theatre', 'autres']);
             $table->text('description');
             $table->string('image')->nullable();
             $table->integer('quantity')->default(0);

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Book;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
@@ -14,7 +15,6 @@ use App\Filament\Resources\UserResource\Pages;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-user';
     protected static ?string $navigationLabel = 'Utilisateurs';
     protected static ?string $modelLabel = 'Utilisateur';
@@ -38,6 +38,11 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(50),
+                Forms\Components\Select::make('rented_books')
+                    ->label('Livres empruntés')
+                    ->multiple()
+                    ->relationship('rentedBooks', 'title')
+                    ->preload(),
                 Forms\Components\Select::make('roles')
                     ->label('Role')
                     ->multiple()
@@ -63,6 +68,10 @@ class UserResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('rentedBooks.title')
+                    ->label('Livres empruntés')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TagsColumn::make('roles.name')

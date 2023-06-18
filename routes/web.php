@@ -7,6 +7,8 @@ use Illuminate\Foundation\Application;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\BookController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,3 +23,5 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
+
+Route::get('/books', [BookController::class, 'findBooks']);

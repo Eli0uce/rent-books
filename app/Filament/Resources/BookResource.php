@@ -25,19 +25,19 @@ class BookResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('image')
+                Forms\Components\TextInput::make('image')
+                    ->autofocus()
                     ->label('Image')
                     ->placeholder('Image du livre'),
                 Forms\Components\TextInput::make('title')
                     ->label('Titre')
-                    ->autofocus()
                     ->required()
                     ->placeholder('Titre du livre'),
                 Forms\Components\TextInput::make('author')
                     ->label('Auteur')
                     ->required()
                     ->placeholder('Auteur du livre'),
-                Forms\Components\Select::make('kind_id')
+                Forms\Components\Select::make('kind')
                     ->label('Genre')
                     ->placeholder('Genre du livre')
                     ->options([
@@ -45,10 +45,9 @@ class BookResource extends Resource
                         'fantasy' => 'Fantasy',
                         'bd' => 'Bande dessinée',
                         'manga' => 'Manga',
-                        'essai' => 'Essai',
                         'poesie' => 'Poésie',
                         'theatre' => 'Théâtre',
-                        'autre' => 'Autre',
+                        'autres' => 'Autres',
                     ]),
                 Forms\Components\TextInput::make('quantity')
                     ->label('Quantité')
@@ -77,7 +76,7 @@ class BookResource extends Resource
                     ->label('Auteur')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('kind_id')
+                Tables\Columns\TextColumn::make('kind')
                     ->label('Genre')
                     ->sortable()
                     ->searchable(),
