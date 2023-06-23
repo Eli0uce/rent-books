@@ -96,8 +96,16 @@ const Home = () => {
                                 {truncateDescription(book.description, 100)}
                             </p>
                             <p className="text-m mb-2 text-gray-700">
-                                <strong>Quantité :</strong> {book.quantity}{" "}
-                                restants
+                                <strong>Disponibilité : </strong>
+                                {book.quantity > 0 ? (
+                                    <span className="text-green-500">
+                                        Disponible
+                                    </span>
+                                ) : (
+                                    <span className="text-red-500">
+                                        Indisponible
+                                    </span>
+                                )}
                             </p>
                         </div>
                         <div className="px-6 pt-4 pb-2">

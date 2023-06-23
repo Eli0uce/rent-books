@@ -19,6 +19,9 @@ class BookResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'Espace Membre';
+    protected static ?string $navigationLabel = 'Livres';
+    protected static ?string $modelLabel = 'Livre';
+    protected static ?string $pluralModelLabel = 'Livres';
     protected static ?string $slug = 'books';
     protected static function getNavigationBadge(): ?string
     {
