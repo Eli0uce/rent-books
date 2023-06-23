@@ -108,9 +108,15 @@ const Home = () => {
                                 )}
                             </p>
                         </div>
-                        <div className="px-6 pt-4 pb-2">
+                        <div className="px-6 pt-4 pb-2 flex justify-end">
+                            {" "}
                             <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                                 {book.kind}
+                            </span>
+                            <span>
+                                <button className="rounded-full bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-1 rounded">
+                                    Voir plus
+                                </button>
                             </span>
                         </div>
                     </div>
