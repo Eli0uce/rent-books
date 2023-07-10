@@ -1,12 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
+import Swal from "sweetalert2";
 
 const Home = () => {
     const [books, setBooks] = useState([]);
     const [allKinds, setAllKinds] = useState([]);
     const [selectedKind, setSelectedKind] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
+
+    const handleViewMore = (book) => {
+        Swal.fire({
+            title: book.title,
+            width: 700,
+            html: `
+                <div style="display: flex; justify-content: center;">
+                    <img src="${book.image}" alt="${book.title}" height="200" />
+                </div>
+                <p><strong>Auteur :</strong> ${book.author}</p></br>
+                <p><strong>Description :</strong> ${book.description}</p></br>
+                <p><strong>Disponibilité :</strong> ${
+                    book.quantity > 0 ? "Disponible" : "Indisponible"
+                }</p>
+            `,
+            confirmButtonText: "Fermer",
+            customClass: {
+                confirmButton:
+                    "rounded-full bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-1 rounded",
+            },
+        });
+    };
 
     useEffect(() => {
         fetchBooks();
@@ -114,7 +137,10 @@ const Home = () => {
                                 {book.kind}
                             </span>
                             <span>
-                                <button className="rounded-full bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-1 rounded">
+                                <button
+                                    className="rounded-full bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-1 rounded"
+                                    onClick={() => handleViewMore(book)}
+                                >
                                     Voir plus
                                 </button>
                             </span>

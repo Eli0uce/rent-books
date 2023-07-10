@@ -30,6 +30,8 @@
         "@inertiajs/inertia-react": "^0.8.1",
         "@inertiajs/react": "^1.0.8",
         "framer-motion": "^10.12.16",
-        "react-router-dom": "^6.13.0"
+        "react-modal": "^3.16.1",
+        "react-router-dom": "^6.13.0",
+        "sweetalert2": "^11.7.12"
     }
 }
